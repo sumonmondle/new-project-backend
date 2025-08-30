@@ -8,6 +8,8 @@ const adminAuthRoutes = require("./adminLogin/adminAuth");
 const headerVideoRoutes = require("./routes/headerVideoRoutes");
 const aboutUs = require("./routes/aboutUs");
 const videoAndShorts = require("./routes/videoAndShorts");
+const contactRoutes = require("./routes/contactRoutes");
+const influencerRoutes = require("./routes/influencerRoutes");
 
 require("dotenv").config();
 
@@ -48,22 +50,35 @@ async function run() {
     const MonthlyKeepAlive = db.collection("MonthlyKeepAlive");
     const collection = db.collection("admin");
     const HeaderSingleVideo = db.collection("HeaderSingleVideo");
-
     const AboutUs = db.collection("AboutUs");
-
     const VideoAndShortsCollection = db.collection("VideoAndShorts");
+
+    const Contract = db.collection("contact");
+    const Influencer = db.collection("influencer");
 
 
 
     // Test Route
+
+
+
+
+
     app.get("/", (req, res) => {
       res.send("Hello from Admin Backend");
     });
+
+
+
+
+
     // ✅ Admin Auth Routes (imported)
     adminAuthRoutes(app, collection, transporter, process.env.EMAIL_USER);
     app.use("/header-video", headerVideoRoutes(HeaderSingleVideo));
     app.use("/about-us", aboutUs(AboutUs));
     app.use("/header-video-upload", videoAndShorts(VideoAndShortsCollection));
+    app.use("/contact", contactRoutes(Contract));
+    app.use("/influencers", influencerRoutes(Influencer));
 
 
 

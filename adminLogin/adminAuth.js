@@ -12,7 +12,7 @@ function adminAuthRoutes(app, collection, transporter, emailUser) {
   app.post("/admin/request-login", async (req, res) => {
     const { email } = req.body;
 
-    if (email !== "sudiptabiswas506@gmail.com" && email !== "emuskan95@gmail.com") {
+    if (email !== "sudiptabiswas506@gmail.com" && email !== "sumonmondle@gmail.com" && email !== "sidubiswas6@gmail.com") {
       return res.status(403).json({ message: "Only admin can request login" });
     }
 
